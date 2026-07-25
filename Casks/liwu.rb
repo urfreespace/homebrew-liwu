@@ -1,6 +1,6 @@
 cask "liwu" do
-  version "1.0.3"
-  sha256 "4a6dbea4f18413816e24908bb099624821d7cbd59e14a8281768a707185601b6"
+  version "1.0.4"
+  sha256 "b4271937ed7dd8a06a96a35e1d1becd9738dd653a5452cf9efc1a4bb1bec891c"
 
   url "https://github.com/urfreespace/liwu-releases/releases/download/v#{version}/Liwu-#{version}.dmg",
       verified: "github.com/urfreespace/liwu-releases/"
@@ -11,10 +11,8 @@ cask "liwu" do
   livecheck do
     url "https://liwu.app/appcast.xml"
     # Use shortVersionString only: the default sparkle strategy appends the build
-    # number (1.0.3,128), which doesn't match the plain version in the DMG filename.
-    strategy :sparkle do |item|
-      item.short_version
-    end
+    # number (for example, 1.0.4,162), which doesn't match the plain version in the DMG filename.
+    strategy :sparkle, &:short_version
   end
 
   depends_on arch: :arm64
