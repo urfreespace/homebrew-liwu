@@ -1,11 +1,11 @@
 cask "liwu" do
-  version "1.0.8"
-  sha256 "bcac8eac7261c104818ac08fe63e5ab1a00ff3c7af3898674ffae081c16ab312"
+  version "2.0.0"
+  sha256 "2784e771699960fb094aa3689a4d8b87a6bc251f237bd0a78b9eceaca5793ff0"
 
   url "https://github.com/urfreespace/liwu-releases/releases/download/v#{version}/Liwu-#{version}.dmg",
       verified: "github.com/urfreespace/liwu-releases/"
   name "Liwu"
-  desc "Menu bar battery charge limiter"
+  desc "Menu bar utilities with charging targets and Keep Awake"
   homepage "https://liwu.app/"
 
   livecheck do
@@ -16,9 +16,23 @@ cask "liwu" do
   end
 
   depends_on arch: :arm64
-  depends_on macos: :sonoma
+  depends_on macos: :tahoe
 
   app "Liwu.app"
+
+  # Named dependencies cover major releases only; enforce the minor boundary before installation.
+  preflight_steps do
+    run "/bin/sh", args: ["-c", <<~SH]
+      version=$(/usr/bin/sw_vers -productVersion)
+      major=${version%%.*}
+      rest=${version#*.}
+      minor=${rest%%.*}
+      if [ "${major}" -lt 26 ] || { [ "${major}" -eq 26 ] && [ "${minor}" -lt 7 ]; }; then
+        echo "Liwu 2 requires macOS 26.7 or later. Download Liwu 1 at https://liwu.app/legacy." >&2
+        exit 1
+      fi
+    SH
+  end
 
   # zap is intentionally omitted: helper/config on-disk locations are not guessed;
   # to be added once confirmed with the developer.
