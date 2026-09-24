@@ -1,6 +1,6 @@
 cask "liwu" do
-  version "2.1.2"
-  sha256 "a210dff0591c86213254db038139fe68ba61eb85523631bd8d89b9fc5105cde0"
+  version "2.2.0"
+  sha256 "1982156f54c9c1a1115a2532ff05579afa607f4a4de5b303f024a30f70d04ba8"
 
   url "https://github.com/urfreespace/liwu-releases/releases/download/v#{version}/Liwu-#{version}.dmg",
       verified: "github.com/urfreespace/liwu-releases/"
