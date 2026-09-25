@@ -34,6 +34,13 @@ cask "liwu" do
     SH
   end
 
-  # zap is intentionally omitted: helper/config on-disk locations are not guessed;
-  # to be added once confirmed with the developer.
+  # Use the signed application's release-and-unregister flow before Homebrew removes it.
+  # Keep user preferences and licenses. A cleanup failure must abort removal.
+  uninstall quit:   "com.liwu.app",
+            script: {
+              executable:   "/usr/bin/env",
+              args:         ["LIWU_UNINSTALL=1", "#{appdir}/Liwu.app/Contents/MacOS/Liwu"],
+              sudo:         false,
+              must_succeed: true,
+            }
 end
