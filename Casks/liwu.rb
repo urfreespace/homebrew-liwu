@@ -5,7 +5,7 @@ cask "liwu" do
   url "https://github.com/urfreespace/liwu-releases/releases/download/v#{version}/Liwu-#{version}.dmg",
       verified: "github.com/urfreespace/liwu-releases/"
   name "Liwu"
-  desc "Menu bar utilities with charging targets and Keep Awake"
+  desc "Menu bar charge limiter, Keep Awake and menu bar icon organizer"
   homepage "https://liwu.app/"
 
   livecheck do
